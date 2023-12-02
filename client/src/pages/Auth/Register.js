@@ -8,11 +8,15 @@ const Register = () => {
   const [password,setPassword]=useState("")
   const [phone,setPhone]=useState("")
   const [address,setAddress]=useState("")
+  const handleSubmit=(e)=>{
+    e.preventDefault()
+    console.log(name,email,password,address,phone);
+  };
   return (
    <Layout title={"Register - Ecommerce App"}>
     <div className="register"></div>
     <h1>Register Page</h1>
-   <form>
+   <form onSubmit={handleSubmit}>
   <div className="mb-3">
     <input type="text" value={name} onChange={(e)=> setName(e.target.value)} className="form-control" id="exampleInputEmail1" placeholder="Enter Your Name" required />
   </div>
