@@ -5,10 +5,12 @@ import dotenv from 'dotenv';
 import morgan from 'morgan';
 import connectDb from './config/db.js';
 import authRoutes from './routes/authRoutes.js';
+import cors from 'cors';
 dotenv.config();
 connectDb();
 //rest obj
 const app=express();
+app.use(cors());
 //middlewareness 
 app.use(morgan('dev'));
 app.use(express.json());

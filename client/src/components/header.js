@@ -1,8 +1,21 @@
 import React from 'react'
 import { NavLink ,Link} from 'react-router-dom'
 import { FaCartShopping } from "react-icons/fa6";
+import { useAuth } from '../context/auth';
+import {toast} from 'react-toastify';
+import Dashboard from './../pages/user/Dashboard';
 
 const Header = () => {
+  const [auth,setAuth]=useAuth();
+const handleLogut=()=>{
+  setAuth({
+    ...auth,
+    user:null,
+    token:''
+  })
+  localStorage.removeItem("auth")
+  toast.success('Logout Successfully')
+};
   return (
  <nav className="navbar navbar-expand-lg bg-body-tertiary">
   <div className="container-fluid">
@@ -21,17 +34,35 @@ const Header = () => {
           <NavLink to="/category" className="nav-link "  >
             Category</NavLink>
         </li>
-        <li className="nav-
+      {
+        !auth.user? (<>
+          <li className="nav-
 item">
           <NavLink to="/register" className="nav-link" >
             Register</NavLink>
         </li>
         
-        <li className="nav-
-item">
+        <li className="nav-item">
           <NavLink to="/login" className="nav-link" >
             Login</NavLink>
         </li>
+        </>) : (<>
+          <li class="nav-item dropdown">
+          <NavLink class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {auth?.user?.name}
+          </NavLink>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><NavLink to={`/dashboard/${auth?.user?.role===1 ? 'admin':'user'}`} className="dropdown-item" >Dashboard</NavLink></li>
+            <li>
+            <NavLink onClick={handleLogut} to="/login" className="dropdown-item" >
+            Logout</NavLink>
+            </li>
+          
+          </ul>
+        </li>
+         
+        </>)
+      }
         <li className="nav-
 item">
           <NavLink to="/cart" className="nav-link">

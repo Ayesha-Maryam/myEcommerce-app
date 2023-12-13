@@ -4,7 +4,7 @@ import Footer from './layout/footer';
 import {Helmet} from 'react-helmet';
 const Layout=({children,title,description,keywords, author})=>{
     return(
-        <diV>
+        <div>
  <Helmet>
                            
       <meta charset="UTF-8"/>
@@ -23,7 +23,7 @@ const Layout=({children,title,description,keywords, author})=>{
 {children}
 </main>
 <Footer/>
-        </diV>
+        </div>
     )
 };
 Layout.defaultProps={
